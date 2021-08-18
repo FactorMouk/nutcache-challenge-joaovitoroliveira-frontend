@@ -20,11 +20,10 @@ import {
 
 export async function getEmployeesListRequestMiddleware(dispatch) {
   getEmployeesList()
-    .then((employeeslist) => {
-      console.log(employeeslist);
+    .then((response) => {
       dispatch({
         type: GET_EMPLOYEES_LIST_SUCCESSFUL,
-        employeeslist: employeeslist,
+        employeesList: response.data,
       });
     })
     .catch((error) => {

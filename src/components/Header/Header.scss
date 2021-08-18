@@ -1,0 +1,13 @@
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  > img {
+    width: 75px;
+  }
+  > h1 {
+    color: #37576a;
+    margin-left: 15px;
+  }
+}
