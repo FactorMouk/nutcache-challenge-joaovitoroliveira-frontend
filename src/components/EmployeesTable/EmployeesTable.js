@@ -6,6 +6,10 @@ import { EmployeeTableItem } from "../EmployeeTableItem/EmployeeTableItem";
 import { GeneralModal } from "../GeneralModal/GeneralModal";
 import { EmployeeForm } from "../EmployeeForm/EmployeeForm";
 import { DeleteModal } from "../DeleteModal/DeleteModal";
+import { IN_PROGRESS, SUCCESSFUL } from "../../utils/requests";
+import { Loading } from "../Loading/Loading";
+import listLoadingIllust from "./../../assets/imgs/listLoadingIllust.svg";
+import emptyListIllust from "./../../assets/imgs/emptyListIllust.svg";
 
 export function EmployeesTable() {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -17,9 +21,46 @@ export function EmployeesTable() {
     (state) => state.employeesState.employeesList
   );
 
+  const employeesListRequest = useSelector(
+    (state) => state.employeesState.requests.employeesList
+  );
+
+  const addEmployeeRequest = useSelector(
+    (state) => state.employeesState.requests.addEmployee
+  );
+
+  const editEmployeeRequest = useSelector(
+    (state) => state.employeesState.requests.updateEmployee
+  );
+
+  const deleteEmployeeRequest = useSelector(
+    (state) => state.employeesState.requests.deleteEmployee
+  );
+
   useEffect(() => {
     getEmployeesList();
   }, []);
+
+  useEffect(() => {
+    if (addEmployeeRequest === SUCCESSFUL) {
+      setShowAddModal(false);
+      getEmployeesList();
+    }
+  }, [addEmployeeRequest]);
+
+  useEffect(() => {
+    if (editEmployeeRequest === SUCCESSFUL) {
+      setShowEditModal(false);
+      getEmployeesList();
+    }
+  }, [editEmployeeRequest]);
+
+  useEffect(() => {
+    if (deleteEmployeeRequest === SUCCESSFUL) {
+      setShowDeleteModal(false);
+      getEmployeesList();
+    }
+  }, [deleteEmployeeRequest]);
 
   return (
     <section className="EmployeesTable">
@@ -32,59 +73,88 @@ export function EmployeesTable() {
           Add Employee
         </button>
       </section>
-      <section>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>E-mail</th>
-              <th>Start Date</th>
-              <th>Team</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {employeesList.map((employeeModel, index) => (
-              <EmployeeTableItem
-                key={index}
-                employeeModel={employeeModel}
-                onSeeEditModal={(employeeModel) => {
-                  setCurrentEmployee(employeeModel);
-                  setShowEditModal(true);
-                }}
-                onSeeDeleteModal={(id) => {
-                  setCurrentEmployee(id);
-                  setShowDeleteModal(true);
-                }}
-              ></EmployeeTableItem>
-            ))}
-          </tbody>
-        </table>
-      </section>
+      {employeesListRequest === IN_PROGRESS && (
+        <section className="illust-section">
+          <img src={listLoadingIllust} alt="Loading list"></img>
+          <h4>Loading employees list...</h4>
+          <Loading></Loading>
+        </section>
+      )}
+      {employeesListRequest !== IN_PROGRESS && (
+        <section>
+          {employeesList.length === 0 && (
+            <section className="illust-section">
+              <img src={emptyListIllust} alt="Empty list"></img>
+              <h4>
+                There are no employees here yet. How about adding someone?
+              </h4>
+            </section>
+          )}
+          {employeesList.length > 0 && (
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>E-mail</th>
+                  <th>Start Date</th>
+                  <th>Team</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {employeesList.map((employeeModel, index) => (
+                  <EmployeeTableItem
+                    key={index}
+                    employeeModel={employeeModel}
+                    onSeeEditModal={(employeeModel) => {
+                      setCurrentEmployee(employeeModel);
+                      setShowEditModal(true);
+                    }}
+                    onSeeDeleteModal={(id) => {
+                      setCurrentEmployee(id);
+                      setShowDeleteModal(true);
+                    }}
+                  ></EmployeeTableItem>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </section>
+      )}
       <GeneralModal
         show={showAddModal}
+        loading={addEmployeeRequest === IN_PROGRESS}
         onCloseModal={() => setShowAddModal(false)}
       >
-        {showAddModal && <EmployeeForm type="add"></EmployeeForm>}
+        {showAddModal && (
+          <EmployeeForm
+            type="add"
+            addEmployeeRequest={addEmployeeRequest}
+          ></EmployeeForm>
+        )}
       </GeneralModal>
       <GeneralModal
         show={showEditModal}
+        loading={editEmployeeRequest === IN_PROGRESS}
         onCloseModal={() => setShowEditModal(false)}
       >
         {showEditModal && (
           <EmployeeForm
             type="edit"
             employeeData={currentEmployee}
+            editEmployeeRequest={editEmployeeRequest}
           ></EmployeeForm>
         )}
       </GeneralModal>
       <GeneralModal
         show={showDeleteModal}
+        loading={deleteEmployeeRequest === IN_PROGRESS}
         onCloseModal={() => setShowDeleteModal(false)}
       >
         {showDeleteModal && (
           <DeleteModal
             id={currentEmployee}
+            deleteEmployeeRequest={deleteEmployeeRequest}
             onCloseModal={() => setShowDeleteModal(false)}
           ></DeleteModal>
         )}

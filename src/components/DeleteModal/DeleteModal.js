@@ -1,5 +1,7 @@
 import "./DeleteModal.scss";
 import { deleteEmployee } from "./../../facades/employeesFacade";
+import { IN_PROGRESS } from "../../utils/requests";
+import { Loading } from "../Loading/Loading";
 
 export function DeleteModal(props) {
   function onDeleteEmployee() {
@@ -14,14 +16,17 @@ export function DeleteModal(props) {
         <button
           className="app-button secondary-button"
           onClick={() => props.onCloseModal()}
+          disabled={props.deleteEmployeeRequest === IN_PROGRESS}
         >
           No, calm down...
         </button>
         <button
           className="app-button primary-button"
           onClick={() => onDeleteEmployee()}
+          disabled={props.deleteEmployeeRequest === IN_PROGRESS}
         >
-          Yes, delete!
+          {props.deleteEmployeeRequest !== IN_PROGRESS && "Yes, delete!"}
+          {props.deleteEmployeeRequest === IN_PROGRESS && <Loading></Loading>}
         </button>
       </div>
     </section>

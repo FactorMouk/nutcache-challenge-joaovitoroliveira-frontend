@@ -3,7 +3,9 @@ import { useState } from "react";
 import { cpfMask, startDateMask } from "./../../utils/masks";
 import { FormInput } from "../FormInput/FormInput";
 import { FormSelect } from "../FormSelect/FormSelect";
+import { Loading } from "../Loading/Loading";
 import { addEmployee, updateEmployee } from "../../facades/employeesFacade";
+import { IN_PROGRESS } from "../../utils/requests";
 
 export function EmployeeForm(props) {
   const [form, setForm] = useState({
@@ -35,7 +37,7 @@ export function EmployeeForm(props) {
           : "Man cisgender",
       errors: [],
       isRequired: true,
-      touched: props.type === "edit" ? true : false,
+      touched: true,
     },
     email: {
       label: "E-mail",
@@ -80,7 +82,7 @@ export function EmployeeForm(props) {
       errors: [],
       state: "blank",
       isRequired: false,
-      touched: props.type === "edit" ? true : false,
+      touched: true,
     },
   });
 
@@ -214,11 +216,21 @@ export function EmployeeForm(props) {
         ></FormSelect>
         <button
           className="app-button primary-button"
-          disabled={!isFormValid()}
+          disabled={
+            !isFormValid() ||
+            props.addEmployeeRequest === IN_PROGRESS ||
+            props.editEmployeeRequest === IN_PROGRESS
+          }
           onClick={(e) => onSaveEmployee(e)}
         >
-          {props.type === "add" && "Add Employee"}
-          {props.type === "edit" && "Edit Employee"}
+          {props.addEmployeeRequest !== IN_PROGRESS &&
+            props.type === "add" &&
+            "Add Employee"}
+          {props.editEmployeeRequest !== IN_PROGRESS &&
+            props.type === "edit" &&
+            "Edit Employee"}
+          {(props.addEmployeeRequest === IN_PROGRESS ||
+            props.editEmployeeRequest === IN_PROGRESS) && <Loading></Loading>}
         </button>
       </form>
     </section>
