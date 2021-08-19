@@ -26,8 +26,7 @@ export async function getEmployeesListRequestMiddleware(dispatch) {
         employeesList: response.data,
       });
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       dispatch({
         type: GET_EMPLOYEES_LIST_ERROR,
       });

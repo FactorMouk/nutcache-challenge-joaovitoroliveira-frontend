@@ -1,6 +1,11 @@
 import "./EmployeeForm.scss";
 import { useState } from "react";
 import { cpfMask, startDateMask } from "./../../utils/masks";
+import {
+  validateCPF,
+  validateStartDate,
+  validateEmail,
+} from "./../../utils/validators";
 import { FormInput } from "../FormInput/FormInput";
 import { FormSelect } from "../FormSelect/FormSelect";
 import { Loading } from "../Loading/Loading";
@@ -47,6 +52,7 @@ export function EmployeeForm(props) {
           : "",
       errors: [],
       isRequired: true,
+      validator: "email",
       touched: props.type === "edit" ? true : false,
     },
     cpf: {
@@ -58,6 +64,7 @@ export function EmployeeForm(props) {
       errors: [],
       isRequired: true,
       useMask: "cpf",
+      validator: "cpf",
       touched: props.type === "edit" ? true : false,
     },
     startDate: {
@@ -69,6 +76,7 @@ export function EmployeeForm(props) {
       errors: [],
       isRequired: true,
       useMask: "startDate",
+      validator: "startDate",
       touched: props.type === "edit" ? true : false,
     },
     team: {
@@ -91,7 +99,12 @@ export function EmployeeForm(props) {
       ...form,
       [input]: {
         ...form[input],
-        errors: checkErrors(form[input].label, value, form[input].isRequired),
+        errors: checkErrors(
+          form[input].label,
+          value,
+          form[input].isRequired,
+          form[input].validator
+        ),
         value: form[input].useMask
           ? checkMask(form[input].useMask, value)
           : value,
@@ -109,10 +122,25 @@ export function EmployeeForm(props) {
     }
   }
 
-  function checkErrors(label, value, isRequired) {
+  function checkErrors(label, value, isRequired, validator) {
     let errors = [];
     if (isRequired && value === "") {
       errors.push(`${label} is required!`);
+    }
+    if (validator === "cpf") {
+      if (!validateCPF(value)) {
+        errors.push(`${label} is invalid!`);
+      }
+    }
+    if (validator === "startDate") {
+      if (!validateStartDate(value)) {
+        errors.push(`${label} is invalid!`);
+      }
+    }
+    if (validator === "email") {
+      if (!validateEmail(value)) {
+        errors.push(`${label} is invalid!`);
+      }
     }
     return errors;
   }

@@ -20,7 +20,7 @@ export function FormInput(props) {
       ></input>
       <span className="error-label">
         {props.inputForm.errors.map((error, index) => (
-          <span key={index}>{error}</span>
+          <span key={index}>{error} </span>
         ))}
       </span>
     </label>
