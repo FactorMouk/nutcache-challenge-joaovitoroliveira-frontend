@@ -1,4 +1,4 @@
-.wrap {
+article {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -13,23 +13,16 @@
   overflow-x: hidden;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 200ms ease;
-  .modal {
-    background-color: white;
-    overflow-y: scroll;
+  transition: opacity 100ms ease;
+  > section {
+    background-color: #f8f8f8;
     overflow-x: hidden;
-    display: block;
-    width: 60vw;
-    height: 60%;
-    min-height: 400px;
-    min-width: 400px;
-    margin: 20px 0px 20px 0px;
-    padding-bottom: 20px;
+    display: none;
+    padding: 15px 20px;
     border-radius: 5px;
     box-shadow: 0 12px 25px 0 rgba(199, 175, 189, 0.25);
-    opacity: 0;
     transform: scale(0.6);
-    transition: opacity 200ms 200ms ease, transform 200ms 200ms ease;
+    transition: display 200ms 200ms ease, transform 200ms 200ms ease;
   }
   .close-button {
     width: 50px;
@@ -54,9 +47,9 @@
   pointer-events: auto;
   opacity: 1;
   transition: all 200ms ease-in-out;
-  .modal {
-    opacity: 1;
+  section {
+    display: block;
     transform: scale(1);
-    transition: opacity 200ms 200ms ease, transform 200ms 200ms ease;
+    transition: display 200ms 200ms ease, transform 200ms 200ms ease;
   }
 }

@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import "./EmployeesTable.scss";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { getEmployeesList } from "./../../facades/employeesFacade";
 import { EmployeeTableItem } from "../EmployeeTableItem/EmployeeTableItem";
 import { GeneralModal } from "../GeneralModal/GeneralModal";
+import { EmployeeForm } from "../EmployeeForm/EmployeeForm";
+import { DeleteModal } from "../DeleteModal/DeleteModal";
 
 export function EmployeesTable() {
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [currentEmployee, setCurrentEmployee] = useState(null);
 
   const employeesList = useSelector(
     (state) => state.employeesState.employeesList
@@ -43,6 +48,14 @@ export function EmployeesTable() {
               <EmployeeTableItem
                 key={index}
                 employeeModel={employeeModel}
+                onSeeEditModal={(employeeModel) => {
+                  setCurrentEmployee(employeeModel);
+                  setShowEditModal(true);
+                }}
+                onSeeDeleteModal={(id) => {
+                  setCurrentEmployee(id);
+                  setShowDeleteModal(true);
+                }}
               ></EmployeeTableItem>
             ))}
           </tbody>
@@ -52,27 +65,29 @@ export function EmployeesTable() {
         show={showAddModal}
         onCloseModal={() => setShowAddModal(false)}
       >
-        <div className="content">
-          <img
-            src="https://cdn.pixabay.com/photo/2015/01/09/11/11/office-594132__340.jpg"
-            alt="Developer"
-          />
-          <div className="text">
-            <h2>John Doe</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-              aliquid placeat omnis adipisci dolores quae amet mollitia sint,
-              temporibus eum magnam facilis odio ex incidunt? Deleniti quam et
-              rem obcaecati. Laborum atque odit expedita nulla.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
-              labore laborum, assumenda dolorum provident quod itaque earum,
-              officia in placeat dignissimos nostrum? Totam corrupti nihil
-              repudiandae ducimus atque quod eos!
-            </p>
-          </div>
-        </div>
+        {showAddModal && <EmployeeForm type="add"></EmployeeForm>}
+      </GeneralModal>
+      <GeneralModal
+        show={showEditModal}
+        onCloseModal={() => setShowEditModal(false)}
+      >
+        {showEditModal && (
+          <EmployeeForm
+            type="edit"
+            employeeData={currentEmployee}
+          ></EmployeeForm>
+        )}
+      </GeneralModal>
+      <GeneralModal
+        show={showDeleteModal}
+        onCloseModal={() => setShowDeleteModal(false)}
+      >
+        {showDeleteModal && (
+          <DeleteModal
+            id={currentEmployee}
+            onCloseModal={() => setShowDeleteModal(false)}
+          ></DeleteModal>
+        )}
       </GeneralModal>
     </section>
   );

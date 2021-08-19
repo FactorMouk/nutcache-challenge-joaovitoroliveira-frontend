@@ -1,5 +1,4 @@
 import "./EmployeeTableItem.scss";
-import lookIcon from "./../../assets/icons/look.png";
 import editIcon from "./../../assets/icons/edit.png";
 import removeIcon from "./../../assets/icons/remove.png";
 
@@ -12,9 +11,16 @@ export function EmployeeTableItem(props) {
       <td>{props.employeeModel.team}</td>
       <td>
         <aside>
-          <img src={lookIcon} alt="See employee button"></img>
-          <img src={editIcon} alt="Edit employee button"></img>
-          <img src={removeIcon} alt="Remove employee button"></img>
+          <img
+            src={editIcon}
+            alt="Edit employee button"
+            onClick={() => props.onSeeEditModal(props.employeeModel)}
+          ></img>
+          <img
+            src={removeIcon}
+            alt="Remove employee button"
+            onClick={() => props.onSeeDeleteModal(props.employeeModel._id)}
+          ></img>
         </aside>
       </td>
     </tr>

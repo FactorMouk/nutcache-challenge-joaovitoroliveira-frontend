@@ -19,6 +19,13 @@
     }
     &.primary-button {
       background-color: #37576ad4;
+      &:disabled {
+        background-color: #b4b4b4d4;
+        cursor: default;
+      }
+    }
+    &.secondary-button {
+      background-color: #a2a2a2;
     }
   }
 }
