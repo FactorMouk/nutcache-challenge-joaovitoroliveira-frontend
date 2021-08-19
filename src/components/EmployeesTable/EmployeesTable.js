@@ -10,11 +10,14 @@ import { IN_PROGRESS, SUCCESSFUL } from "../../utils/requests";
 import { Loading } from "../Loading/Loading";
 import listLoadingIllust from "./../../assets/imgs/listLoadingIllust.svg";
 import emptyListIllust from "./../../assets/imgs/emptyListIllust.svg";
+import { GeneralToast } from "../GeneralToast/GeneralToast";
 
 export function EmployeesTable() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showToast, setToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
   const [currentEmployee, setCurrentEmployee] = useState(null);
 
   const employeesList = useSelector(
@@ -44,23 +47,32 @@ export function EmployeesTable() {
   useEffect(() => {
     if (addEmployeeRequest === SUCCESSFUL) {
       setShowAddModal(false);
-      getEmployeesList();
+      endingAction("Employee added!");
     }
   }, [addEmployeeRequest]);
 
   useEffect(() => {
     if (editEmployeeRequest === SUCCESSFUL) {
       setShowEditModal(false);
-      getEmployeesList();
+      endingAction("Employee updated!");
     }
   }, [editEmployeeRequest]);
 
   useEffect(() => {
     if (deleteEmployeeRequest === SUCCESSFUL) {
       setShowDeleteModal(false);
-      getEmployeesList();
+      endingAction("Employee deleted!");
     }
   }, [deleteEmployeeRequest]);
+
+  function endingAction(message) {
+    getEmployeesList();
+    setToastMessage(message);
+    setToast(true);
+    setTimeout(() => {
+      setToast(false);
+    }, 5000);
+  }
 
   return (
     <section className="EmployeesTable">
@@ -159,6 +171,7 @@ export function EmployeesTable() {
           ></DeleteModal>
         )}
       </GeneralModal>
+      {showToast && <GeneralToast message={toastMessage}></GeneralToast>}
     </section>
   );
 }
