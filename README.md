@@ -17,6 +17,8 @@ A lista das principais features da aplicação está descrita abaixo:
 - Responsividade e layout flexivo;
 - Configurações de PWA, com possibilidade de instalação em smartphones tal qual um aplicativo nativo.
 
+O back-end da aplicação pode ser encontrado neste repositório: [https://github.com/FactorMouk/nutcache-challenge-joaovitoroliveira-backend](https://github.com/FactorMouk/nutcache-challenge-joaovitoroliveira-backend)
+
 ## Ambiente de desenvolvimento
 
 As ferramentas utilizadas para o desenvolvimento da aplicação são listadas abaixo:
