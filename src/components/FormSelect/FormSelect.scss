@@ -28,3 +28,11 @@ label {
     margin: 2px 5px 5px 5px;
   }
 }
+
+@media screen and (max-width: 370px) {
+  label {
+    > select {
+      width: 268px;
+    }
+  }
+}
