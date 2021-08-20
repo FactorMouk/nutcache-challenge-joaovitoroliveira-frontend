@@ -1,4 +1,4 @@
-# Employees App
+# Employees App Front-end
 
 Um simples aplicativo de lista de funcionários feito em React <3
 
