@@ -7,10 +7,9 @@ import { GeneralModal } from "../GeneralModal/GeneralModal";
 import { EmployeeForm } from "../EmployeeForm/EmployeeForm";
 import { DeleteModal } from "../DeleteModal/DeleteModal";
 import { IN_PROGRESS, SUCCESSFUL } from "../../utils/requests";
-import { Loading } from "../Loading/Loading";
-import listLoadingIllust from "./../../assets/imgs/listLoadingIllust.svg";
-import emptyListIllust from "./../../assets/imgs/emptyListIllust.svg";
 import { GeneralToast } from "../GeneralToast/GeneralToast";
+import { LoadingList } from "../LoadingList/LoadingList";
+import { EmptyList } from "../EmptyList/EmptyList";
 
 export function EmployeesTable() {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -80,30 +79,18 @@ export function EmployeesTable() {
         <h2>List of Employees</h2>
         <button
           className="app-button primary-button"
+          data-testid="test-table-add-button"
           onClick={() => setShowAddModal(true)}
         >
           Add Employee
         </button>
       </section>
-      {employeesListRequest === IN_PROGRESS && (
-        <section className="illust-section">
-          <img src={listLoadingIllust} alt="Loading list"></img>
-          <h4>Loading employees list...</h4>
-          <Loading></Loading>
-        </section>
-      )}
+      {employeesListRequest === IN_PROGRESS && <LoadingList></LoadingList>}
       {employeesListRequest !== IN_PROGRESS && (
         <section>
-          {employeesList.length === 0 && (
-            <section className="illust-section">
-              <img src={emptyListIllust} alt="Empty list"></img>
-              <h4>
-                There are no employees here yet. How about adding someone?
-              </h4>
-            </section>
-          )}
+          {employeesList.length === 0 && <EmptyList></EmptyList>}
           {employeesList.length > 0 && (
-            <table>
+            <table data-testid="employees-table">
               <thead>
                 <tr>
                   <th>Name</th>

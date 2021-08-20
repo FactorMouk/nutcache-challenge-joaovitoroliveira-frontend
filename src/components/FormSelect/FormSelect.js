@@ -8,6 +8,7 @@ export function FormSelect(props) {
         {props.inputForm.isRequired && <span className="required-star">*</span>}
       </span>
       <select
+        data-testid="form-input-value"
         className={props.inputForm.errors.length > 0 ? "input-error" : ""}
         name={props.name}
         id={props.id}
@@ -21,7 +22,7 @@ export function FormSelect(props) {
           </option>
         ))}
       </select>
-      <span className="error-label">
+      <span className="error-label" data-testid="form-input-error">
         {props.inputForm.errors.map((error, index) => (
           <span key={index}>{error}</span>
         ))}
