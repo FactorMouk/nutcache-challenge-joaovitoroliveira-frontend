@@ -97,7 +97,7 @@ Segue abaixo o resultado para Mobile:
 
 ## PWA
 
-Como citado anteriormente, o aplicativo está com a funcionalidade de PWA operante. Para testá-la, acesse [este link](https://to-do-app-guava.herokuapp.com) através de um dispositivo móvel e adicione a aplicação em sua tela inicial.
+Como citado anteriormente, o aplicativo está com a funcionalidade de PWA operante.
 
 O service worker configurado guarda em cache os arquivos JS e imagens necessários para o funcionamento do aplicativo. Caso o dispositivo móvel perca conexão com a internet, ainda assim a página principal será mostrada com o loading rodando normalmente.
 
