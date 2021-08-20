@@ -1,6 +1,5 @@
 .EmployeesTable {
   background-color: white;
-  width: 1200px;
   margin: 0px 30px;
   padding: 15px 20px;
   box-shadow: 1px 3px 2px 0px #c1c1c1;
@@ -14,6 +13,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 50px;
     > img {
       width: 450px;
     }
@@ -26,6 +26,47 @@
       box-shadow: 0px 2px 3px -2px #919191;
       th {
         text-align: start;
+        min-width: 125px;
+      }
+    }
+  }
+  .not-display-on-mobile700,
+  .not-display-on-mobile600 {
+    display: table-cell;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .not-display-on-mobile700 {
+    display: none !important;
+  }
+  .EmployeesTable {
+    .illust-section {
+      > img {
+        width: 250px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .not-display-on-mobile600 {
+    display: none !important;
+  }
+  .EmployeesTable {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .EmployeesTable {
+    margin: 0px;
+    padding: 15px 15px;
+    table {
+      thead {
+        th {
+          min-width: auto;
+        }
       }
     }
   }

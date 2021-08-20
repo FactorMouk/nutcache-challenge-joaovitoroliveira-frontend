@@ -108,8 +108,8 @@ export function EmployeesTable() {
                 <tr>
                   <th>Name</th>
                   <th>E-mail</th>
-                  <th>Start Date</th>
-                  <th>Team</th>
+                  <th className="not-display-on-mobile700">Start Date</th>
+                  <th className="not-display-on-mobile600">Team</th>
                   <th>Actions</th>
                 </tr>
               </thead>

@@ -7,8 +7,12 @@ export function EmployeeTableItem(props) {
     <tr>
       <td>{props.employeeModel.name}</td>
       <td>{props.employeeModel.email}</td>
-      <td>{props.employeeModel.startDate}</td>
-      <td>{props.employeeModel.team}</td>
+      <td className="not-display-on-mobile700">
+        {props.employeeModel.startDate}
+      </td>
+      <td className="not-display-on-mobile600">
+        {props.employeeModel.team ? props.employeeModel.team : "None"}
+      </td>
       <td>
         <aside>
           <img

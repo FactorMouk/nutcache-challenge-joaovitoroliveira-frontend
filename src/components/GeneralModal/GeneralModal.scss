@@ -16,6 +16,7 @@ article {
   transition: opacity 100ms ease;
   > section {
     background-color: #f8f8f8;
+    max-height: 90%;
     overflow-x: hidden;
     display: none;
     padding: 15px 20px;
@@ -23,22 +24,24 @@ article {
     box-shadow: 0 12px 25px 0 rgba(199, 175, 189, 0.25);
     transform: scale(0.6);
     transition: display 200ms 200ms ease, transform 200ms 200ms ease;
-  }
-  .close-button {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 15px;
-    right: 30px;
-    margin: "1rem";
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    > img {
-      width: 20px;
+    .close-button {
+      width: 50px;
+      height: 50px;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: none;
+      margin: "1rem";
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      z-index: 9999;
+      > img {
+        width: 20px;
+      }
     }
   }
 }
