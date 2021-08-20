@@ -1,7 +1,7 @@
 import "./Loading.scss";
 export function Loading() {
   return (
-    <div className="lds-ellipsis">
+    <div data-testid="test-loading" className="lds-ellipsis">
       <div></div>
       <div></div>
       <div></div>

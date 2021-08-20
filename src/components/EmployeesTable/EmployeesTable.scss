@@ -9,15 +9,6 @@
     justify-content: space-between;
     align-items: center;
   }
-  .illust-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
-    > img {
-      width: 450px;
-    }
-  }
   table {
     width: 100%;
     font-size: 18px;
@@ -39,13 +30,6 @@
 @media screen and (max-width: 700px) {
   .not-display-on-mobile700 {
     display: none !important;
-  }
-  .EmployeesTable {
-    .illust-section {
-      > img {
-        width: 250px;
-      }
-    }
   }
 }
 

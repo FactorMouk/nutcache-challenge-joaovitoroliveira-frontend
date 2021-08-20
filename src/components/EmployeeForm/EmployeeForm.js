@@ -180,8 +180,10 @@ export function EmployeeForm(props) {
   }
 
   return (
-    <section>
-      <h2>{props.type === "add" ? "Add" : "Edit"} Employee</h2>
+    <section data-testid={props.type === "add" ? "add-form" : "edit-form"}>
+      <h2 data-testid="employee-form-title">
+        {props.type === "add" ? "Add" : "Edit"} Employee
+      </h2>
       <form>
         <FormInput
           inputForm={form.name}
@@ -244,6 +246,7 @@ export function EmployeeForm(props) {
         ></FormSelect>
         <button
           className="app-button primary-button"
+          data-testid="employee-form-button"
           disabled={
             !isFormValid() ||
             props.addEmployeeRequest === IN_PROGRESS ||

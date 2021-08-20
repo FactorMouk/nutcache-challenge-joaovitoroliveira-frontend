@@ -9,7 +9,7 @@ export function DeleteModal(props) {
   }
 
   return (
-    <section>
+    <section data-testid="delete-modal">
       <h2>Delete Employee</h2>
       <p>Are you sure you want to delete this employee?</p>
       <div className="buttons">
