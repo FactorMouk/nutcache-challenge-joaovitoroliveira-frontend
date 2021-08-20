@@ -1,0 +1,33 @@
+label {
+  display: flex;
+  flex-direction: column;
+  margin: 3px 0px;
+  .required-star {
+    color: red;
+    font-weight: bold;
+  }
+  > input {
+    margin-top: 5px;
+    font-size: 18px;
+    padding: 5px;
+    border: none;
+    box-shadow: 0px 1px 2px 0px #b0b0b0;
+    border-radius: 5px;
+    border: 1px solid #cacaca;
+    height: 35px;
+    width: 375px;
+    padding-left: 10px;
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+    }
+  }
+  .input-error {
+    border: 1px solid red;
+  }
+  > .error-label {
+    height: 15px;
+    font-size: 14px;
+    color: red;
+    margin: 2px 5px 5px 5px;
+  }
+}

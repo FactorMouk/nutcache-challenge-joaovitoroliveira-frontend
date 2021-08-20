@@ -1,0 +1,10 @@
+section {
+  padding: 10px 20px;
+  form {
+    display: flex;
+    flex-direction: column;
+    > button {
+      margin: 30px 65px 0px 65px;
+    }
+  }
+}

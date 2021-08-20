@@ -1,0 +1,31 @@
+.toast {
+  position: fixed;
+  z-index: 9999;
+  top: 10px;
+  right: 10px;
+  width: 250px;
+  border-radius: 4px;
+  background-color: rgb(22, 73, 22);
+  padding: 10px;
+  color: white;
+  opacity: 1;
+  animation: toast 5000ms cubic-bezier(0.23, 0.82, 0.16, 1.46);
+  animation-iteration-count: 1;
+}
+
+@keyframes toast {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+}

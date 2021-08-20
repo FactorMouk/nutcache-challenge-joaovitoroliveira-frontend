@@ -1,0 +1,55 @@
+article {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  background-color: rgba(90, 91, 99, 0.75);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  overflow-x: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 100ms ease;
+  > section {
+    background-color: #f8f8f8;
+    overflow-x: hidden;
+    display: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 12px 25px 0 rgba(199, 175, 189, 0.25);
+    transform: scale(0.6);
+    transition: display 200ms 200ms ease, transform 200ms 200ms ease;
+  }
+  .close-button {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    margin: "1rem";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    > img {
+      width: 20px;
+    }
+  }
+}
+
+.visible {
+  pointer-events: auto;
+  opacity: 1;
+  transition: all 200ms ease-in-out;
+  section {
+    display: block;
+    transform: scale(1);
+    transition: display 200ms 200ms ease, transform 200ms 200ms ease;
+  }
+}
